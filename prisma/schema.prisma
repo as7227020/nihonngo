@@ -18,16 +18,13 @@ model User {
     emailVerified DateTime?
     password      String
     loginType     String
+    sessions      Session[]
 }
 
 model Session {
-    id           String   @id @default(auto()) @map("_id") @db.ObjectId
-    userId       Int      @map(name: "user_id")
+    id           String   @id @default(uuid()) @map("_id") @db.ObjectId
+    sessionToken String   @unique
+    userId       String
     expires      DateTime
-    sessionToken String   @unique @map(name: "session_token")
-    accessToken  String   @unique @map(name: "access_token")
-    createdAt    DateTime @default(now()) @map(name: "created_at")
-    updatedAt    DateTime @default(now()) @map(name: "updated_at")
-
-    @@map(name: "sessions")
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
