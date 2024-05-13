@@ -3,5 +3,10 @@ type ApiRetrunData = {
   message: String;
   data: any;
 };
+type User = {
+  id: string;
+  userName: string;
+  email: string;
+};
 
-export type { ApiRetrunData };
+export type { ApiRetrunData, User };

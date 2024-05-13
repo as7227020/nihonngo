@@ -20,7 +20,8 @@ export default function Home() {
     const providers = await getProviders().then((res) => {
       //  console.log(res, "<<<<< : provider response");
       //  console.log(res?.github.name);
-      SetloginType(res);
+      console.log(res);
+      //SetloginType(res);
     });
   };
 
@@ -49,7 +50,13 @@ export default function Home() {
             Object.values(loginType).map((provider, index) => {
               return (
                 <div key={index}>
-                  <button onClick={() => signIn()}>登入</button>
+                  <button
+                    onClick={() =>
+                      signIn("line", { callbackUrl: "/page/loginView" })
+                    }
+                  >
+                    登入
+                  </button>
                 </div>
               );
             })}
