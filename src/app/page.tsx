@@ -3,6 +3,7 @@
 import { ClientSafeProvider, getProviders, signIn } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import LoginView from "./page/loginView/page";
 
 export default function Home() {
   const test = async () => {
@@ -61,10 +62,6 @@ export default function Home() {
                 </div>
               );
             })}
-
-          <Link href={"/api/auth/signin"} className="">
-            登入
-          </Link>
         </div>
       </div>
     </div>
