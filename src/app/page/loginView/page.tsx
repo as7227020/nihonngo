@@ -18,6 +18,6 @@ export default async function LoginView() {
       </div>
     );
   }
-  console.log(user);
+
   return <div>登入畫面 : </div>;
 }
