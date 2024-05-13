@@ -21,7 +21,7 @@ export default function Home() {
       //  console.log(res, "<<<<< : provider response");
       //  console.log(res?.github.name);
       console.log(res);
-      //SetloginType(res);
+      SetloginType(res);
     });
   };
 
