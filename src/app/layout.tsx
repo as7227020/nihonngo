@@ -3,7 +3,8 @@ import { Inter } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NextAuthProvider } from "./lib/next-auth/provider";
 import "bootstrap/dist/css/bootstrap.css";
-import "./globals.css";
+import { Suspense } from "react";
+import Loading from "../../Loading";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <NextAuthProvider>
-        <body className={inter.className}>{children}</body>
+        <Suspense fallback={<Loading />}>
+          <body className={inter.className}>{children}</body>
+        </Suspense>
       </NextAuthProvider>
     </html>
   );
