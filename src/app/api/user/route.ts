@@ -21,18 +21,17 @@ export async function POST(request: Request, response: Response) {
 
   try {
     //拿全部員工資料
-    const res = await prisma.user.create({
-      data: {
-        userName: "test",
-        userId: "test",
-        email: "",
-        emailVerified: new Date(),
-        password: "e",
-        loginType: "1",
-      },
-    });
+    // const res = await prisma.user.create({
+    //   data: {
+    //     userId: "test",
+    //     email: "",
+    //     emailVerified: new Date(),
+    //     password: "e",
+    //     loginType: "1",
+    //   },
+    // });
     //   console.log(res);
-    return NextResponse.json({ status: 200, messgae: "成功", data: res });
+    return NextResponse.json({ status: 200, messgae: "成功", data: null });
   } catch (err: any) {
     return NextResponse.json({
       status: 500,
