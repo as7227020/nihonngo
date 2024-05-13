@@ -21,11 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <NextAuthProvider>
-        <Suspense fallback={<Loading />}>
-          <body className={inter.className}>{children}</body>
-        </Suspense>
-      </NextAuthProvider>
+      <head>
+        <body className={inter.className}>
+          <NextAuthProvider>
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+          </NextAuthProvider>
+        </body>
+      </head>
     </html>
   );
 }
