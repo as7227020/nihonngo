@@ -19,3 +19,15 @@ model User {
     password      String
     loginType     String
 }
+
+model Session {
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId       Int      @map(name: "user_id")
+    expires      DateTime
+    sessionToken String   @unique @map(name: "session_token")
+    accessToken  String   @unique @map(name: "access_token")
+    createdAt    DateTime @default(now()) @map(name: "created_at")
+    updatedAt    DateTime @default(now()) @map(name: "updated_at")
+
+    @@map(name: "sessions")
+}

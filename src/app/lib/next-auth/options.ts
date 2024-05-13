@@ -10,6 +10,7 @@ export const nextAuthOptions: NextAuthOptions = {
     LineProvider({
       clientId: process.env.LINE_CLIENT_ID!,
       clientSecret: process.env.LINE_CLIENT_SECRET!,
+      //issuer:'https://nihonngo.vercel.app/auth/realms/Test'
     }),
   ],
   callbacks: {
