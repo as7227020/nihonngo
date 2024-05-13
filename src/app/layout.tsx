@@ -22,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <NextAuthProvider>
-        <LoginView />
         <Suspense fallback={<Loading />}>
           <body className={inter.className}>{children}</body>
         </Suspense>

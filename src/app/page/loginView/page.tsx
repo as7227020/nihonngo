@@ -1,6 +1,7 @@
 import { nextAuthOptions } from "@/app/lib/next-auth/options";
 import { User } from "@/app/types/type";
 import { getServerSession } from "next-auth";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -17,5 +18,15 @@ export default async function LoginView() {
       </div>
     );
   }
-  return <div>登入畫面 userName : {user.userName}</div>;
+  return (
+    <div>
+      登入畫面 userName : {user.name}
+      <Image
+        width={50}
+        height={50}
+        alt="profile_icon"
+        src={user?.image || ""}
+      />
+    </div>
+  );
 }
