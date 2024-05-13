@@ -1,7 +1,16 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-
+"use client";
 export default function Home() {
+  const test = async () => {
+    console.log("click");
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data: "123" }),
+    });
+
+    const ans = response.json();
+    console.log(ans);
+  };
   return (
     <div className="container p-2">
       <div className="card">
@@ -10,9 +19,14 @@ export default function Home() {
           <p className="card-text">
             Some quick example text to build on the card title and make up the
           </p>
-          <a href="#" className="btn btn-primary">
-            Go somewhere
-          </a>
+
+          <button
+            onClick={() => {
+              test();
+            }}
+          >
+            點
+          </button>
         </div>
       </div>
     </div>
