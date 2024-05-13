@@ -1,4 +1,8 @@
 "use client";
+
+import { ClientSafeProvider, getProviders, signIn } from "next-auth/react";
+import { useEffect, useState } from "react";
+
 export default function Home() {
   const test = async () => {
     console.log("click");
@@ -11,6 +15,19 @@ export default function Home() {
     const ans = response.json();
     console.log(ans);
   };
+  const [loginType, SetloginType] = useState<any>();
+  const GetProviders = async () => {
+    const providers = await getProviders().then((res) => {
+      //  console.log(res, "<<<<< : provider response");
+      //  console.log(res?.github.name);
+      SetloginType(res);
+    });
+  };
+
+  useEffect(() => {
+    GetProviders();
+  }, []);
+
   return (
     <div className="container p-2">
       <div className="card">
@@ -27,7 +44,15 @@ export default function Home() {
           >
             點
           </button>
-          <a href="/api/auth/signin">登入</a>
+
+          {loginType &&
+            Object.values(loginType).map((provider, index) => {
+              return (
+                <div key={index}>
+                  <button onClick={() => signIn()}>登入</button>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
