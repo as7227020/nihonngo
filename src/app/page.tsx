@@ -27,6 +27,7 @@ export default function Home() {
           >
             點
           </button>
+          <a href="/api/auth/signin">登入</a>
         </div>
       </div>
     </div>
