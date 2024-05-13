@@ -4,7 +4,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "../prisma";
 
 export const nextAuthOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
   debug: false,
   providers: [
     LineProvider({
@@ -13,6 +12,7 @@ export const nextAuthOptions: NextAuthOptions = {
       //issuer:'https://nihonngo.vercel.app/auth/realms/Test'
     }),
   ],
+  adapter: PrismaAdapter(prisma),
   callbacks: {
     session: ({ session, user }) => {
       return {
