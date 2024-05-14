@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Suspense } from "react";
 import Loading from "../../Loading";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import ToasterProvider from "./components/toaster/ToasterProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,10 @@ export default function RootLayout({
       <head>
         <body className={inter.className}>
           <NextAuthProvider>
-            <Suspense fallback={<Loading />}>{children}</Suspense>
+            <Suspense fallback={<Loading />}>
+              {children}
+              <ToasterProvider />
+            </Suspense>
           </NextAuthProvider>
         </body>
       </head>

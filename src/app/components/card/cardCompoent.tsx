@@ -4,13 +4,16 @@ import { CardDataType } from "@/app/types/type";
 import { useEffect, useState } from "react";
 import "./cardCompoent.css";
 import Speaker from "../speaker/speaker";
+import toast from "react-hot-toast";
 
 type CardCompoentProps = {
+  title: string;
   cardData: CardDataType;
   nextFunction: () => void;
 };
 
 export default function CardCompoent({
+  title,
   cardData,
   nextFunction,
 }: CardCompoentProps) {
@@ -24,14 +27,31 @@ export default function CardCompoent({
 
     if (e == cardData.answer) {
       SetinputTextStatus("正確");
+      SetinputText("");
       SetanswerState(true);
+      setTimeout(() => {
+        nextFunction();
+      }, 1000);
+      toast.success("正確, 即將繼續下一題");
     } else {
       SetinputTextStatus("....");
       SetanswerState(false);
     }
   }
 
+  useEffect(() => {
+    SetinputTextStatus("");
+    SetanswerTip("");
+    SetanswerState(false);
+    SetinputText("");
+  }, [cardData.question]);
+
   function watchAnswer() {
+    if (answerState == true) {
+      nextFunction();
+      return;
+    }
+
     const tipIndex = Math.floor(Math.random() * cardData.answer.length);
 
     let showTip = "";
@@ -68,7 +88,7 @@ export default function CardCompoent({
         <div className="col-12">
           <div className="card text-center">
             <h5 className="card-header" style={{ fontWeight: "600" }}>
-              單字挑戦（1/1）
+              單字挑戦{title}
             </h5>
             <div className="card-body">
               <div
@@ -106,6 +126,7 @@ export default function CardCompoent({
               >
                 <input
                   type="text"
+                  value={inputText}
                   aria-label="First name"
                   className={
                     answerState == false

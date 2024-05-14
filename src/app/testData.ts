@@ -14,6 +14,12 @@ export const GetCardData = (): CardDataType[] => {
     supperUser: "",
     note: "",
   });
+  empty.push({
+    question: "蚯蚓",
+    answer: "みみず",
+    supperUser: "",
+    note: "",
+  });
 
   return empty;
 };
