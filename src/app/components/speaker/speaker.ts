@@ -4,19 +4,24 @@ export function Speak(
   rate: number,
   pitch: number
 ) {
-  if (window == null) {
+  if (typeof window === "undefined") {
     return;
   }
   const synth = window.speechSynthesis;
   const utterThis = new SpeechSynthesisUtterance(speakText);
-  utterThis.voice = getVoice_Speakers()[speakerType];
+  const voiceData: SpeechSynthesisVoice[] = getVoice_Speakers();
+  if (voiceData.length <= 0) {
+    utterThis.lang = "ja-JP";
+  } else {
+    utterThis.voice = voiceData[speakerType];
+  }
   utterThis.rate = rate;
   utterThis.pitch = pitch;
   synth.speak(utterThis);
 }
 
 export const getVoice_Speakers = (): SpeechSynthesisVoice[] => {
-  if (window == null) {
+  if (typeof window === "undefined") {
     return [];
   }
   const synth = window.speechSynthesis;
