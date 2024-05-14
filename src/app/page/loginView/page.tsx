@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import LobbyPage from "../Lobby/page";
+import { getVoice_Speakers } from "@/app/components/speaker/speaker";
 
 export default async function LoginView() {
   const session = await getServerSession(nextAuthOptions);
@@ -25,6 +26,12 @@ export default async function LoginView() {
       登入畫面 : {user.name}
       <Image width={50} height={50} alt="profile_icon" src={user?.image} />
       <LobbyPage />
+      {getVoice_Speakers() &&
+        getVoice_Speakers().map((data, index) => (
+          <div key={index}>
+            name : {data.name} lang : {data.lang}
+          </div>
+        ))}
     </div>
   );
 }

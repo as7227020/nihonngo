@@ -4,6 +4,9 @@ export function Speak(
   rate: number,
   pitch: number
 ) {
+  if (window == null) {
+    return;
+  }
   const synth = window.speechSynthesis;
   const utterThis = new SpeechSynthesisUtterance(speakText);
   utterThis.voice = getVoice_Speakers()[speakerType];
@@ -13,6 +16,9 @@ export function Speak(
 }
 
 export const getVoice_Speakers = (): SpeechSynthesisVoice[] => {
+  if (window == null) {
+    return [];
+  }
   const synth = window.speechSynthesis;
   const voices = synth.getVoices();
   const jp_Speaker = voices.filter((voice) => voice.lang == "ja-JP");
