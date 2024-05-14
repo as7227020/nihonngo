@@ -7,10 +7,9 @@ import "./page.css";
 
 type CardMainProps = {
   cardData: CardDataType;
-  nextFunction: () => void;
 };
 
-export default function CardMain({ cardData, nextFunction }: CardMainProps) {
+export default function CardMain({ cardData }: CardMainProps) {
   const [inputTextStatus, SetinputTextStatus] = useState("");
   const [answer, Setanswer] = useState(false);
   function inputAction(e: string) {
