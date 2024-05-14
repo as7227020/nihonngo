@@ -14,7 +14,12 @@ export default function QuestionMain() {
       {cardDatas &&
         cardDatas.map((cardData, index) => (
           <div key={index}>
-            <CardMain theData={cardData} />
+            <CardMain
+              question={cardData.question}
+              answer={cardData.answer}
+              note=""
+              supperUser=""
+            />
           </div>
         ))}
     </div>

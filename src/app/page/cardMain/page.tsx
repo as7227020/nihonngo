@@ -5,20 +5,21 @@ import { CardDataType } from "@/app/types/type";
 import { useEffect, useState } from "react";
 import "./page.css";
 
-type CardMainProps = {
-  theData: CardDataType;
-};
-
-export default function CardMain({ theData }: CardMainProps) {
+export default function CardMain({
+  question,
+  answer,
+  note,
+  supperUser,
+}: CardDataType) {
   const [inputTextStatus, SetinputTextStatus] = useState("");
-  const [answer, Setanswer] = useState(false);
+  const [answerState, SetanswerState] = useState(false);
   function inputAction(e: string) {
-    if (e == theData.answer) {
+    if (e == answer) {
       SetinputTextStatus("正確");
-      Setanswer(true);
+      SetanswerState(true);
     } else {
       SetinputTextStatus("....");
-      Setanswer(false);
+      SetanswerState(false);
     }
   }
 
@@ -39,7 +40,7 @@ export default function CardMain({ theData }: CardMainProps) {
             </h5>
             <div className="card-body">
               <h5 className="card-title">
-                單字 : {theData.question}
+                單字 : {question}
                 <button
                   type="button"
                   className="btn btn-sm"
@@ -53,7 +54,7 @@ export default function CardMain({ theData }: CardMainProps) {
                     height: "30px",
                     width: "30px",
                   }}
-                  onClick={() => Speak(theData.question, 2, 0.7, 0.7)}
+                  onClick={() => Speak(question, 2, 0.7, 0.7)}
                 >
                   <i className="bi bi-megaphone-fill"></i>
                 </button>
@@ -69,7 +70,7 @@ export default function CardMain({ theData }: CardMainProps) {
                   type="text"
                   aria-label="First name"
                   className={
-                    answer == false
+                    answerState == false
                       ? " m-3 rounded inputType"
                       : " m-3 rounded inputTypeOK inputType"
                   }
