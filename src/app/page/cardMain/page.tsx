@@ -11,12 +11,9 @@ type CardMainProps = {
 };
 
 export default function CardMain({ cardData, nextFunction }: CardMainProps) {
-  const [inputText, SetinputText] = useState("");
   const [inputTextStatus, SetinputTextStatus] = useState("");
   const [answer, Setanswer] = useState(false);
   function inputAction(e: string) {
-    SetinputText(e);
-
     if (e == cardData.answer) {
       SetinputTextStatus("正確");
       Setanswer(true);
