@@ -3,7 +3,7 @@
 import { Speak } from "@/app/components/speaker/speaker";
 import { CardDataType } from "@/app/types/type";
 import { useEffect, useState } from "react";
-import "./page.css";
+import "./cardCompoent.css";
 
 type CardCompoentProps = {
   cardData: CardDataType;

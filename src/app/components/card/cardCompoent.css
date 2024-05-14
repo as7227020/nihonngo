@@ -1,0 +1,18 @@
+.inputTypeOK{
+    box-shadow: 2px 2px 10px rgb(59, 211, 105);
+
+    border: 1px solid rgb(99, 96, 96);
+}
+
+
+
+.inputType{
+    border: 1px solid rgb(99, 96, 96);
+    text-align: center;
+    height: 40px;
+}
+.inputType:focus{
+    outline: none;
+    border: 1px solid rgb(99, 96, 96);
+    text-align: center;
+}
