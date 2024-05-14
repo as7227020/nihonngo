@@ -7,7 +7,7 @@ import "./page.css";
 import { CardDataType } from "@/app/types/type";
 
 type CardMainProps = {
-  theData: CardDataType;
+  theData: string;
   nextFunction: () => void;
 };
 
