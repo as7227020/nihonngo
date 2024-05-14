@@ -24,6 +24,7 @@ export default async function LoginView() {
     <div>
       登入畫面 : {user.name}
       <Image width={50} height={50} alt="profile_icon" src={user?.image} />
+      <LobbyPage />
     </div>
   );
 }
