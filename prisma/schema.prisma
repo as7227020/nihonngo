@@ -63,7 +63,7 @@ model CardVocabularyData {
     createDT   DateTime //增加時間
 }
 
-model UserData {
+model UserLearnData {
     id String @id @default(auto()) @map("_id") @db.ObjectId
 
     UserId               String   @db.ObjectId
