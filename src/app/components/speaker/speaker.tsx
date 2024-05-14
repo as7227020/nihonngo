@@ -47,9 +47,11 @@ export default function Speaker({
           background: "#07070",
           border: "1px solid #707070",
           marginLeft: "8px",
-          marginBottom: "3px",
-          height: "30px",
-          width: "30px",
+          marginRight: "8px",
+          marginBottom: "6px",
+          height: "25px",
+          width: "25px",
+          borderRadius: "5px",
         }}
         onClick={() => {
           DoSpeak();
