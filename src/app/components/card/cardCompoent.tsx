@@ -67,7 +67,7 @@ export default function CardCompoent({
                       ? " m-3 rounded inputType"
                       : " m-3 rounded inputTypeOK inputType"
                   }
-                  placeholder="輸入單字的片假名"
+                  placeholder="輸入單字的平假名"
                   onChange={(e) => {
                     inputAction(e.target.value);
                   }}
