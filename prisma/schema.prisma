@@ -52,6 +52,14 @@ model User {
     @@map("users")
 }
 
+model VerificationToken {
+    identifier String   @id @default(auto()) @map("_id") @db.ObjectId
+    token      String   @unique
+    expires    DateTime
+
+    @@unique([identifier, token])
+}
+
 model CardVocabularyData {
     id         String   @id @default(auto()) @map("_id") @db.ObjectId
     index      Int //編號

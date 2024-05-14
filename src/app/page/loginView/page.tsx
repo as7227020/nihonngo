@@ -14,7 +14,7 @@ export default async function LoginView() {
       <div>
         未登入
         <Link href={"/api/auth/signin"} className="">
-          server登入
+          登入
         </Link>
       </div>
     );
@@ -24,6 +24,9 @@ export default async function LoginView() {
     <div>
       登入畫面 : {user.name} ID: {user.id}
       <Image width={50} height={50} alt="profile_icon" src={user?.image} />
+      <Link href={"/api/auth/signout?callbackUrl=/"} className="">
+        登出
+      </Link>
       <LobbyPage />
     </div>
   );
