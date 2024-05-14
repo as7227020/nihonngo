@@ -6,7 +6,12 @@ import { useEffect, useState } from "react";
 import "./page.css";
 import { CardDataType } from "@/app/types/type";
 
-export default function CardMain() {
+type CardMainProps = {
+  cardData: CardDataType;
+  nextFunction: () => void;
+};
+
+export default function CardMain({ cardData, nextFunction }: CardMainProps) {
   const [inputTextStatus, SetinputTextStatus] = useState("");
   const [answerState, SetanswerState] = useState(false);
 
