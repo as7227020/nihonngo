@@ -2,7 +2,6 @@
 import { GetCardData } from "@/app/testData";
 import { CardDataType } from "@/app/types/type";
 import React, { useEffect, useState } from "react";
-import CardMain from "../cardMain/page";
 
 export default function QuestionMain() {
   const [cardDatas, SetcardDatas] = useState<CardDataType[]>([]);
@@ -11,12 +10,7 @@ export default function QuestionMain() {
   }, []);
   return (
     <div>
-      {cardDatas &&
-        cardDatas.map((cardData, index) => (
-          <div key={index}>
-            <CardMain theData={""} nextFunction={() => {}} />
-          </div>
-        ))}
+      {cardDatas && cardDatas.map((cardData, index) => <div key={index}></div>)}
     </div>
   );
 }
