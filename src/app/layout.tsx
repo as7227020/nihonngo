@@ -5,7 +5,7 @@ import { NextAuthProvider } from "./lib/next-auth/provider";
 import "bootstrap/dist/css/bootstrap.css";
 import { Suspense } from "react";
 import Loading from "../../Loading";
-import LoginView from "./page/loginView/page";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

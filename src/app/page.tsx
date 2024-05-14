@@ -17,13 +17,16 @@ export default function Home() {
     const ans = response.json();
     console.log(ans);
   };
-  const [loginType, SetloginType] = useState<any>();
+  const [loginType, SetloginType] = useState<ClientSafeProvider[]>();
   const GetProviders = async () => {
     const providers = await getProviders().then((res) => {
+      let loginType: ClientSafeProvider[] = [];
       //  console.log(res, "<<<<< : provider response");
       //  console.log(res?.github.name);
-      console.log(res);
-      SetloginType(res);
+      Object.values(res!).map((provider, index) => {
+        loginType.push(provider);
+      });
+      SetloginType(loginType);
     });
   };
 
@@ -54,10 +57,10 @@ export default function Home() {
                 <div key={index}>
                   <button
                     onClick={() =>
-                      signIn("line", { callbackUrl: "/page/loginView" })
+                      signIn(provider.id, { callbackUrl: "/page/loginView" })
                     }
                   >
-                    登入
+                    {provider.name} 登入
                   </button>
                 </div>
               );

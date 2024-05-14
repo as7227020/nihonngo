@@ -10,4 +10,10 @@ type User = {
   image: string;
 };
 
-export type { ApiRetrunData, User };
+type CardDataType = {
+  question: string;
+  answer: string;
+  supperUser: string; //提供者
+  note: string; //單字補充
+};
+export type { ApiRetrunData, User, CardDataType };
