@@ -6,14 +6,14 @@ import { useEffect, useState } from "react";
 import "./page.css";
 
 type CardMainProps = {
-  cardData: CardDataType;
+  theData: CardDataType;
 };
 
-export default function CardMain({ cardData }: CardMainProps) {
+export default function CardMain({ theData }: CardMainProps) {
   const [inputTextStatus, SetinputTextStatus] = useState("");
   const [answer, Setanswer] = useState(false);
   function inputAction(e: string) {
-    if (e == cardData.answer) {
+    if (e == theData.answer) {
       SetinputTextStatus("正確");
       Setanswer(true);
     } else {
@@ -39,7 +39,7 @@ export default function CardMain({ cardData }: CardMainProps) {
             </h5>
             <div className="card-body">
               <h5 className="card-title">
-                單字 : {cardData.question}
+                單字 : {theData.question}
                 <button
                   type="button"
                   className="btn btn-sm"
@@ -53,7 +53,7 @@ export default function CardMain({ cardData }: CardMainProps) {
                     height: "30px",
                     width: "30px",
                   }}
-                  onClick={() => Speak(cardData.question, 2, 0.7, 0.7)}
+                  onClick={() => Speak(theData.question, 2, 0.7, 0.7)}
                 >
                   <i className="bi bi-megaphone-fill"></i>
                 </button>
