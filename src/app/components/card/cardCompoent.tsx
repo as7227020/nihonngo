@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import "./cardCompoent.css";
 import Speaker from "../speaker/speaker";
 import toast from "react-hot-toast";
+import { CardVocabularyData } from "@prisma/client";
 
 type CardCompoentProps = {
   title: string;
-  cardData: CardDataType;
+  cardData: CardVocabularyData;
   nextFunction: () => void;
 };
 

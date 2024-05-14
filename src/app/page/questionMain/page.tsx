@@ -1,12 +1,16 @@
 "use client";
+import AddVocabularyView from "@/app/components/addVocabularyView/page";
 import CardCompoent from "@/app/components/card/cardCompoent";
-import { GetCardData } from "@/app/testData";
-import { CardDataType } from "@/app/types/type";
+import { GetUserData } from "@/app/components/user/getUserData";
+
+import { CardDataType, User } from "@/app/types/type";
+import { CardVocabularyData } from "@prisma/client";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function QuestionMain() {
   const [nowIndex, SetnowIndex] = useState(0);
+  const [nowUserData, SetnowUserData] = useState<User>();
 
   const NextQuestion = () => {
     if (cardDatas.length == nowIndex + 1) {
@@ -16,9 +20,32 @@ export default function QuestionMain() {
 
     SetnowIndex(nowIndex + 1);
   };
-  const [cardDatas, SetcardDatas] = useState<CardDataType[]>([]);
+
+  const GetCardData = async () => {
+    const userDatas = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/addVocabulary`
+    );
+    const resUserData = await userDatas.json();
+    console.log(resUserData);
+    SetcardDatas(resUserData.data);
+    //  SetcardDatas()
+  };
+
+  const [cardDatas, SetcardDatas] = useState<CardVocabularyData[]>([]);
   useEffect(() => {
-    SetcardDatas(GetCardData());
+    GetCardData();
+    GetUserData().then((res) => {
+      console.log(res);
+      SetnowUserData({
+        id: res?.id!,
+        name: res?.name!,
+        email: res?.email!,
+        image: res?.image!,
+        emailVerified: res?.emailVerified!,
+      });
+    });
+
+    // SetcardDatas(GetCardData());
   }, []);
   return (
     <div>
@@ -31,6 +58,10 @@ export default function QuestionMain() {
           }}
         />
       )}
+      <br />
+      開發方便用的...
+      <br />
+      <AddVocabularyView />
     </div>
   );
 }

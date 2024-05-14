@@ -41,51 +41,34 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(auto()) @map("_id") @db.ObjectId
+    id            String     @id @default(auto()) @map("_id") @db.ObjectId
     name          String?
-    email         String?   @unique
-    emailVerified DateTime? @map("email_verified")
+    email         String?    @unique
+    emailVerified DateTime?  @map("email_verified")
     image         String?
     accounts      Account[]
     sessions      Session[]
+    UserData      UserData[]
 
     @@map("users")
 }
 
-// model User {
-//     id            String    @id @default(auto()) @map("_id") @db.ObjectId
-//     userName      String
-//     userId        String    @unique
-//     email         String?
-//     emailVerified DateTime?
-//     password      String
-//     loginType     String
-//     sessions      Session[]
-// }
+model CardVocabularyData {
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    index      Int //編號
+    question   String
+    answer     String
+    supperUser String //提供者
+    note       String //單字補充
+    isShow     Boolean //是否顯示
+    createDT   DateTime //增加時間
 
-// model Account {
-//    id            String    @id @default(auto()) @map("_id") @db.ObjectId
-//   userId            String
-//   type              String
-//   provider          String
-//   providerAccountId String
-//   refresh_token     String? @db.Text
-//   access_token      String? @db.Text
-//   expires_at        Int?
-//   token_type        String?
-//   scope             String?
-//   id_token          String? @db.Text
-//   session_state     String?
+    @@unique([index])
+}
 
-//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-//   @@unique([provider, providerAccountId])
-// }
-
-// model Session {
-//     id           String   @id @default(uuid()) @map("_id") @db.ObjectId
-//     sessionToken String   @unique
-//     userId       String
-//     expires      DateTime
-//     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-// }
+model UserData {
+    id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+    UserData             User     @relation(fields: [UserId], references: [id])
+    UserId               String   @db.ObjectId
+    PassVocabularyIdList String[]
+}
