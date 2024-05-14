@@ -16,4 +16,5 @@ type CardDataType = {
   supperUser: string; //提供者
   note: string; //單字補充
 };
+
 export type { ApiRetrunData, User, CardDataType };

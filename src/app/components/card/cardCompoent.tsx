@@ -1,9 +1,9 @@
 "use client";
 
-import { Speak } from "@/app/components/speaker/speaker";
 import { CardDataType } from "@/app/types/type";
 import { useEffect, useState } from "react";
 import "./cardCompoent.css";
+import Speaker from "../speaker/speaker";
 
 type CardCompoentProps = {
   cardData: CardDataType;
@@ -45,26 +45,13 @@ export default function CardCompoent({
               挑戦（1/1）
             </h5>
             <div className="card-body">
-              <h5 className="card-title">
-                單字 : {cardData.question}
-                <button
-                  type="button"
-                  className="btn btn-sm"
-                  style={{
-                    padding: "0px 4px",
-                    color: "#53b16f",
-                    background: "#07070",
-                    border: "1px solid #707070",
-                    marginLeft: "8px",
-                    marginBottom: "3px",
-                    height: "30px",
-                    width: "30px",
-                  }}
-                  onClick={() => Speak(cardData.question, 2, 0.7, 0.7)}
-                >
-                  <i className="bi bi-megaphone-fill"></i>
-                </button>
-              </h5>
+              <h5 className="card-title">單字 : {cardData.question}</h5>
+              <Speaker
+                speakText={cardData.question}
+                speakerType={2}
+                rate={0.8}
+                pitch={0.8}
+              />
               <div
                 style={{
                   display: "flex",
