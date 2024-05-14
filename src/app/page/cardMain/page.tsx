@@ -7,11 +7,11 @@ import "./page.css";
 import { CardDataType } from "@/app/types/type";
 
 type CardMainProps = {
-  cardData: CardDataType;
+  theData: CardDataType;
   nextFunction: () => void;
 };
 
-export default function CardMain({ cardData, nextFunction }: CardMainProps) {
+export default function CardMain({ theData, nextFunction }: CardMainProps) {
   const [inputTextStatus, SetinputTextStatus] = useState("");
   const [answerState, SetanswerState] = useState(false);
 
