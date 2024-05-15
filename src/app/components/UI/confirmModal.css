@@ -1,0 +1,45 @@
+.topcss{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0,0.4);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: focus-in-expand 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    
+    }
+    @keyframes focus-in-expand {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    
+    .parent{
+        min-width: 300px;
+        max-width: 800px;
+        box-shadow: 6px 6px 15px -5px #202020;
+    }
+    .modalbtn{
+        display: flex;
+        justify-content: space-around;
+        
+    }
+    /*
+    const thestyle = {
+      position: "fixed",
+      top: 0,
+      bottom: 0,
+      right: 0,
+      left: 0,
+      backgroundColor: "rgba(0,0,0,.7)",
+      zIndex: 1000,
+    };
+    
+    */

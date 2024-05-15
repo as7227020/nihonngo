@@ -1,4 +1,5 @@
 "use client";
+
 import AddVocabularyView from "@/app/components/addVocabularyView/page";
 import CardCompoent from "@/app/components/card/cardCompoent";
 import { GetUserData } from "@/app/components/user/getUserData";
