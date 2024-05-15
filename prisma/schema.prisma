@@ -41,13 +41,16 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(auto()) @map("_id") @db.ObjectId
-    name          String?
-    email         String?   @unique
-    emailVerified DateTime? @map("email_verified")
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
+    id              String        @id @default(auto()) @map("_id") @db.ObjectId
+    name            String?
+    email           String?       @unique
+    emailVerified   DateTime?     @map("email_verified")
+    image           String?
+    accounts        Account[]
+    sessions        Session[]
+    isManager       Boolean       @default(false)
+    UserLearnData   UserLearnData @relation(fields: [userLearnDataId], references: [id])
+    userLearnDataId String        @db.ObjectId
 
     @@map("users")
 }
@@ -61,21 +64,22 @@ model VerificationToken {
 }
 
 model CardVocabularyData {
-    id         String   @id @default(auto()) @map("_id") @db.ObjectId
-    index      Int //編號
-    question   String
-    answer     String
-    supperUser String //提供者
-    note       String //單字補充
-    isShow     Boolean //是否顯示
-    createDT   DateTime //增加時間
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    index        Int //編號
+    question     String //問題
+    answer       String //答案
+    supperUser   String //提供者
+    translateStr String //中文意思
+    note         String //單字的額外補充說明
+    isShow       Boolean //是否顯示
+    createDT     DateTime //增加時間
 }
 
 model UserLearnData {
-    id String @id @default(auto()) @map("_id") @db.ObjectId
-
-    UserId               String   @db.ObjectId
-    PassVocabularyIdList String[]
+    id                      String @id @default(auto()) @map("_id") @db.ObjectId
+    UserId                  String @db.ObjectId
+    PassVocabularyIndexList Int[] //CardVocabularyData的index
+    User                    User[]
 }
 
 // model User {

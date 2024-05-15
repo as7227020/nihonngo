@@ -12,6 +12,7 @@ export default function AddVocabularyView() {
       index: 0,
       question: "",
       answer: "",
+      translateStr: "",
       supperUser: "",
       note: "",
       isShow: true,
