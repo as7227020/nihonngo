@@ -1,5 +1,5 @@
 "use client";
-import { signOut } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import React, { useEffect, useState } from "react";
 import "./navbarUI.css";
 import { usePathname, useRouter } from "next/navigation";
@@ -97,23 +97,37 @@ const NavbarUI = () => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                單字打拼
+              <a className="nav-link" href="/page/loginView">
+                單字練習
               </a>
             </li>
-
-            <li className="nav-item">
-              <button
-                onClick={() => {
-                  signOut();
-                }}
-                style={{
-                  border: "none",
-                }}
-              >
-                登出
-              </button>
-            </li>
+            {theStaffData != undefined ? (
+              <li className="nav-item">
+                <button
+                  onClick={() => {
+                    signOut();
+                  }}
+                  style={{
+                    border: "none",
+                  }}
+                >
+                  登出
+                </button>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <button
+                  onClick={() => {
+                    signIn();
+                  }}
+                  style={{
+                    border: "none",
+                  }}
+                >
+                  登入
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       </div>

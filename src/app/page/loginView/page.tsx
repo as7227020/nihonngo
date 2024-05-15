@@ -19,14 +19,14 @@ export default async function LoginView() {
       </div>
     );
   }
-
-  return (
-    <div>
-      登入畫面 : {user.name} ID: {user.id}
-      <Image width={50} height={50} alt="profile_icon" src={user?.image} />
-      <Link href={"/api/auth/signout?callbackUrl=/"} className="">
+  //  登入畫面 : {user.name} ID: {user.id}   <Image width={50} height={50} alt="profile_icon" src={user?.image} />
+  /*
+   <Link href={"/api/auth/signout?callbackUrl=/"} className="">
         登出
       </Link>
+  */
+  return (
+    <div>
       <LobbyPage />
     </div>
   );

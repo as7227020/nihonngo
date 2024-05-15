@@ -155,6 +155,30 @@ export default function Home() {
           )}
         </div>
       </div>
+      <button
+        onClick={() => {
+          if (emailOk == false) {
+            toast.error("メールの同意チェック必要です。");
+            return;
+          }
+          signIn("github", { callbackUrl: "/page/loginView" });
+        }}
+        style={{
+          fontSize: "1.2rem",
+          borderRadius: "10px",
+          border: "1px solid #1f1f22",
+          width: "200px",
+          height: "50px",
+          background: "#2a323b",
+          color: "#ffffff",
+          fontWeight: "500",
+          boxShadow: "0px 1px 5px #838282",
+          margin: "5px",
+        }}
+        id="logingithub"
+      >
+        github 登録
+      </button>
     </div>
   );
 }
