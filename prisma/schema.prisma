@@ -49,8 +49,8 @@ model User {
     accounts               Account[]
     sessions               Session[]
     isManager              Boolean                  @default(false)
-    UserLearnData          UserLearnData            @relation(fields: [userLearnDataId], references: [id])
-    userLearnDataId        String                   @db.ObjectId
+    UserLearnData          UserLearnData?           @relation(fields: [userLearnDataId], references: [id])
+    userLearnDataId        String?                  @db.ObjectId
     CardVocabularySelfData CardVocabularySelfData[]
 
     @@map("users")
