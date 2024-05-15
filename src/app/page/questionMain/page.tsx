@@ -59,10 +59,6 @@ export default function QuestionMain() {
           }}
         />
       )}
-      <br />
-      開發方便用的...
-      <br />
-      <AddVocabularyView />
     </div>
   );
 }

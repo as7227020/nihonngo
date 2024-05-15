@@ -12,3 +12,11 @@ export const staffData = {
   email: "",
   image: "",
 };
+
+export const GetIsAdmin = (name: string): boolean => {
+  if (name == "as7227020" || name == "Zin.") {
+    return true;
+  }
+
+  return false;
+};

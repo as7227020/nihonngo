@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { GetUserData } from "../../user/getUserData";
 import LoadingView from "../loadingView";
 import { User } from "@/app/types/type";
+import { GetIsAdmin } from "@/app/bsData";
 
 const NavbarUI = () => {
   const [loadingViewController, SetloadingViewController] = useState(false);
@@ -96,11 +97,21 @@ const NavbarUI = () => {
                 首頁
               </a>
             </li>
+
             <li className="nav-item">
               <a className="nav-link" href="/page/loginView">
                 單字練習
               </a>
             </li>
+
+            {theStaffData != undefined && GetIsAdmin(theStaffData.name) ? (
+              <li className="nav-item">
+                <a className="nav-link" href="/page/vocabularyManager">
+                  單字管理
+                </a>
+              </li>
+            ) : null}
+
             {theStaffData != undefined ? (
               <li className="nav-item">
                 <button
