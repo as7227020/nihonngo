@@ -1,0 +1,38 @@
+.navbar-sticky-in{
+    background-color: rgb(189, 189, 189);
+    animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  
+    z-index: 3;
+}
+
+.navbar-shadow{
+    box-shadow: 0 0 20px rgba(15, 15, 15, 0.5);
+}
+
+@keyframes slide-in-top {
+    0% {
+      transform: translateY(-1000px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+
+  .navbar-sticky-in-out{
+    opacity: 0;
+    z-index: -10;
+  }
+
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  

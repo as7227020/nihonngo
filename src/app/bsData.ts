@@ -5,3 +5,10 @@ export const GetApiRetrunData = {
   message: "",
   data: null,
 };
+export const staffData = {
+  id: "",
+  name: "",
+  emailVerified: new Date(),
+  email: "",
+  image: "",
+};

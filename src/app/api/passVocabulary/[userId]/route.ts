@@ -21,7 +21,7 @@ export async function PUT(
         id: userId,
       },
     });
-
+    //let passData = res.
     return NextResponse.json({
       status: 200,
       message: "OK",

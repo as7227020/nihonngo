@@ -28,11 +28,12 @@ export default function CardCompoent({
 
     if (e == cardData.answer) {
       SetinputTextStatus("正確");
-      SetinputText("");
+      SetanswerTip(cardData.answer);
       SetanswerState(true);
       setTimeout(() => {
+        SetinputText("");
         nextFunction();
-      }, 1000);
+      }, 1500);
       toast.success("正確, 即將繼續下一題");
     } else {
       SetinputTextStatus("....");
