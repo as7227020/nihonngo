@@ -41,12 +41,12 @@ export default function Home() {
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">日文學習網站へようこそ！</h5>
-          <p className="card-text">ここに漢字をたぶっり練習できます。</p>
+          <p className="card-text">ここでは漢字をたぶっり練習できます。</p>
           <p className="card-text">
-            以下でLINEを登録すれば、練習のデータを記録されます。
+            以下で登録すれば、練習の履歴が記録されます。
           </p>
           <p className="card-text">
-            登録してないでも、Webサイトも利用できます！、ただ勉強の資料を記録されていない。
+            登録してない場合は、Webサイト利用できますが、履歴の記録はありません。
           </p>
           <div className="form-check mt-4">
             <input
@@ -60,7 +60,7 @@ export default function Home() {
               }}
             />
             <label className="form-check-label" htmlFor="flexCheckDefault">
-              LINEを登録時、メールは当サイトにデータを記録ため、使うのを同意する。
+              登録する際、メールは当サイトに記録されるため、ご了承ください。
             </label>
           </div>
           <div
@@ -79,7 +79,7 @@ export default function Home() {
                 signIn("line", { callbackUrl: "/page/loginView" });
               }}
               style={{
-                fontSize: "2rem",
+                fontSize: "1.2rem",
                 borderRadius: "10px",
                 border: "1px solid #ffffff1",
                 width: "200px",
@@ -93,6 +93,30 @@ export default function Home() {
               id="loginLine"
             >
               LINE 登録
+            </button>
+            <button
+              onClick={() => {
+                if (emailOk == false) {
+                  toast.error("メールの同意チェック必要です。");
+                  return;
+                }
+                signIn("google", { callbackUrl: "/page/loginView" });
+              }}
+              style={{
+                fontSize: "1.2rem",
+                borderRadius: "10px",
+                border: "1px solid #ffffff1",
+                width: "200px",
+                height: "50px",
+                background: "#3b77c7",
+                color: "#ffffff",
+                fontWeight: "500",
+                boxShadow: "0px 1px 5px #838282",
+                margin: "5px",
+              }}
+              id="loginGoogle"
+            >
+              Google 登録
             </button>
           </div>
         </div>
