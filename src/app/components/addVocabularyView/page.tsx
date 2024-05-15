@@ -15,6 +15,7 @@ export default function AddVocabularyView() {
       translateStr: "",
       supperUser: "",
       note: "",
+      vocabularyType: 0,
       isShow: true,
       createDT: new Date(),
     };

@@ -41,16 +41,17 @@ model Session {
 }
 
 model User {
-    id              String        @id @default(auto()) @map("_id") @db.ObjectId
-    name            String?
-    email           String?       @unique
-    emailVerified   DateTime?     @map("email_verified")
-    image           String?
-    accounts        Account[]
-    sessions        Session[]
-    isManager       Boolean       @default(false)
-    UserLearnData   UserLearnData @relation(fields: [userLearnDataId], references: [id])
-    userLearnDataId String        @db.ObjectId
+    id                     String                   @id @default(auto()) @map("_id") @db.ObjectId
+    name                   String?
+    email                  String?                  @unique
+    emailVerified          DateTime?                @map("email_verified")
+    image                  String?
+    accounts               Account[]
+    sessions               Session[]
+    isManager              Boolean                  @default(false)
+    UserLearnData          UserLearnData            @relation(fields: [userLearnDataId], references: [id])
+    userLearnDataId        String                   @db.ObjectId
+    CardVocabularySelfData CardVocabularySelfData[]
 
     @@map("users")
 }
@@ -64,15 +65,32 @@ model VerificationToken {
 }
 
 model CardVocabularyData {
-    id           String   @id @default(auto()) @map("_id") @db.ObjectId
-    index        Int //編號
-    question     String //問題
-    answer       String //答案
-    supperUser   String //提供者
-    translateStr String //中文意思
-    note         String //單字的額外補充說明
-    isShow       Boolean //是否顯示
-    createDT     DateTime //增加時間
+    id             String   @id @default(auto()) @map("_id") @db.ObjectId
+    index          Int //編號
+    question       String //問題
+    answer         String //答案
+    supperUser     String //提供者
+    translateStr   String //中文意思
+    note           String //單字的額外補充說明
+    isShow         Boolean //是否顯示
+    createDT       DateTime //增加時間
+    vocabularyType Int //題目難度(編號)
+}
+
+model CardVocabularySelfData {
+    id             String   @id @default(auto()) @map("_id") @db.ObjectId
+    index          Int //編號
+    question       String //問題
+    answer         String //答案
+    translateStr   String //中文意思
+    note           String //單字的額外補充說明
+    nowMemoryValue Int //記憶程度
+    vocabularyType Int //題目難度(編號)
+    isShow         Boolean //是否顯示 偏向刪除的不顯示
+    isBeMemory     Boolean //是否記憶
+    createDT       DateTime //增加時間
+    User           User     @relation(fields: [userId], references: [id])
+    userId         String   @db.ObjectId
 }
 
 model UserLearnData {

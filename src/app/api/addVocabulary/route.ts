@@ -4,8 +4,15 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request, response: Response) {
   console.log("全使用者資料:");
   const body = await request.json();
-  const { question, answer, supperUser, note, isShow, translateStr } =
-    body.inputData;
+  const {
+    question,
+    answer,
+    supperUser,
+    note,
+    isShow,
+    translateStr,
+    vocabularyType,
+  } = body.inputData;
   //let retData
   //console.log(request);
 
@@ -29,6 +36,7 @@ export async function POST(request: Request, response: Response) {
         answer: answer,
         translateStr: translateStr,
         supperUser: supperUser,
+        vocabularyType: vocabularyType,
         note: note,
         isShow: true,
         createDT: nowDateData,
