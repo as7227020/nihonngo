@@ -90,7 +90,6 @@ export default function Home() {
                 boxShadow: "0px 1px 5px #838282",
                 margin: "5px",
               }}
-              disabled={emailOk!}
               id="loginLine"
             >
               LINE 登録
