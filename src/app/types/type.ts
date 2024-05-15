@@ -9,6 +9,7 @@ type User = {
   email: string;
   image: string;
   emailVerified: Date;
+  isManager: boolean;
 };
 
 type CardDataType = {

@@ -43,6 +43,7 @@ export default function QuestionMain() {
         email: res?.email!,
         image: res?.image!,
         emailVerified: res?.emailVerified!,
+        isManager: res?.isManager!,
       });
     });
 

@@ -29,6 +29,7 @@ const NavbarUI = () => {
           email: data.email!,
           emailVerified: data.emailVerified!,
           image: data.image!,
+          isManager: data.isManager,
         });
         //  router.push("/page/loginView");
       }
@@ -104,7 +105,8 @@ const NavbarUI = () => {
               </a>
             </li>
 
-            {theStaffData != undefined && GetIsAdmin(theStaffData.name) ? (
+            {theStaffData != undefined &&
+            (GetIsAdmin(theStaffData.name) || theStaffData.isManager) ? (
               <li className="nav-item">
                 <a className="nav-link" href="/page/vocabularyManager">
                   單字管理

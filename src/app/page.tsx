@@ -50,6 +50,7 @@ export default function Home() {
           email: res?.email!,
           emailVerified: res?.emailVerified!,
           image: res?.image!,
+          isManager: res?.isManager,
         });
       }
     });
