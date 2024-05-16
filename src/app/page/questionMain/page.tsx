@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingView from "@/app/components/UI/loadingView";
 import AddVocabularyView from "@/app/components/addVocabularyView/page";
 import CardCompoent from "@/app/components/card/cardCompoent";
 import { GetUserData } from "@/app/components/user/getUserData";
@@ -10,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function QuestionMain() {
+  const [loadingViewController, SetloadingViewController] = useState(false);
   const [nowIndex, SetnowIndex] = useState(0);
   const [nowUserData, SetnowUserData] = useState<User>();
 
@@ -34,6 +36,7 @@ export default function QuestionMain() {
 
   const [cardDatas, SetcardDatas] = useState<CardVocabularyData[]>([]);
   useEffect(() => {
+    SetloadingViewController(true);
     GetCardData();
     GetUserData().then((res) => {
       console.log(res);
@@ -46,11 +49,12 @@ export default function QuestionMain() {
         isManager: res?.isManager!,
       });
     });
-
+    SetloadingViewController(false);
     // SetcardDatas(GetCardData());
   }, []);
   return (
     <div>
+      <LoadingView viewSwitch={loadingViewController} />
       {cardDatas.length >= 1 && (
         <CardCompoent
           title={nowIndex + 1 + " / " + cardDatas.length}

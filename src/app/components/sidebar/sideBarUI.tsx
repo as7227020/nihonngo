@@ -113,7 +113,7 @@ export default function SideBarUI({ child }: SideBarUIProps) {
             }}
           >
             <a
-              onClick={() => router.push("/page/loginView")}
+              onClick={() => router.push("/page/questionMain")}
               className="text-decoration-none px-3 py-2 d-block"
               style={{ cursor: "pointer" }}
             >

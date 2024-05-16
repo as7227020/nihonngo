@@ -12,7 +12,7 @@ export async function POST(request: Request, response: Response) {
     isShow,
     translateStr,
     vocabularyType,
-  } = body.inputData;
+  } = body.inputDataBody;
   //let retData
   //console.log(request);
 

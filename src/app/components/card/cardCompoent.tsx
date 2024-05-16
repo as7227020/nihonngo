@@ -6,6 +6,7 @@ import "./cardCompoent.css";
 import Speaker from "../speaker/speaker";
 import toast from "react-hot-toast";
 import { CardVocabularyData } from "@prisma/client";
+import { VocabularyType } from "@/app/bsData";
 
 type CardCompoentProps = {
   title: string;
@@ -90,7 +91,10 @@ export default function CardCompoent({
         <div className="col-12">
           <div className="card text-center">
             <h5 className="card-header" style={{ fontWeight: "600" }}>
-              單字挑戦{title}
+              {cardData.vocabularyType >= 0
+                ? "難度:" + VocabularyType[cardData.vocabularyType]
+                : ""}{" "}
+              進度({title})
             </h5>
             <div className="card-body">
               <div
@@ -101,7 +105,10 @@ export default function CardCompoent({
                 }}
               >
                 <h5 className="card-title" style={{ fontWeight: "500" }}>
-                  {cardData.question}
+                  {cardData.question}{" "}
+                  {cardData.translateStr.length >= 1
+                    ? "(" + cardData.translateStr + ")"
+                    : ""}
                 </h5>
                 <Speaker
                   speakText={cardData.question}
@@ -149,8 +156,12 @@ export default function CardCompoent({
               >
                 {answerState ? "下一題" : "隨機提示"}
               </button>
+              <h5 className="mt-4" style={{ fontWeight: "500" }}>
+                備註 :
+                <br />
+                {cardData.note.length >= 1 ? "(" + cardData.note + ")" : ""}
+              </h5>
             </div>
-            {inputTextStatus}
           </div>
         </div>
       </div>

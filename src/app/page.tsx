@@ -109,7 +109,7 @@ export default function Home() {
                       toast.error("メールの同意チェック必要です。");
                       return;
                     }
-                    signIn("line", { callbackUrl: "/page/loginView" });
+                    signIn("line", { callbackUrl: "/" });
                   }}
                   style={{
                     fontSize: "1.2rem",
@@ -133,7 +133,7 @@ export default function Home() {
                       toast.error("メールの同意チェック必要です。");
                       return;
                     }
-                    signIn("google", { callbackUrl: "/page/loginView" });
+                    signIn("google", { callbackUrl: "/" });
                   }}
                   style={{
                     fontSize: "1.2rem",

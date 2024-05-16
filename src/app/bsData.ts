@@ -20,3 +20,24 @@ export const GetIsAdmin = (name: string): boolean => {
 
   return false;
 };
+
+export enum VocabularyType {
+  N5,
+  N4,
+  N3,
+  N2,
+  N1,
+  單字,
+  狀聲詞,
+  LV100,
+  LV90,
+  LV80,
+  LV70,
+  LV60,
+  LV50,
+  LV40,
+  LV30,
+  LV20,
+  LV10,
+  LV00,
+}
