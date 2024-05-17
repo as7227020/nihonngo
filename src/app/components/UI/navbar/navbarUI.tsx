@@ -30,6 +30,8 @@ const NavbarUI = () => {
           emailVerified: data.emailVerified!,
           image: data.image!,
           isManager: data.isManager,
+          UserLearnData: data.UserLearnData,
+          CardVocabularySelfData: data.CardVocabularySelfData,
         });
         //  router.push("/page/loginView");
       }

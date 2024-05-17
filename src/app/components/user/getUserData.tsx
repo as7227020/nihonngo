@@ -1,5 +1,6 @@
 "use client";
-import { User } from "@prisma/client";
+
+import { User } from "@/app/types/type";
 import { getSession } from "next-auth/react";
 import toast from "react-hot-toast";
 

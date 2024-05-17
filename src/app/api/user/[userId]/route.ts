@@ -13,6 +13,9 @@ export async function GET(
   try {
     const user = await prisma.user.findUnique({
       where: { id: userId },
+      include: {
+        CardVocabularySelfData: true,
+      },
     });
     console.log(user);
 

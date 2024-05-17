@@ -50,8 +50,8 @@ model User {
     sessions               Session[]
     isManager              Boolean                  @default(false)
     CardVocabularySelfData CardVocabularySelfData[]
-    UserLearnData          UserLearnData?           @relation(fields: [userLearnDataId], references: [id])
-    userLearnDataId        String?                  @db.ObjectId
+
+    userLearnDataId String @default("-1")
 
     @@map("users")
 }
@@ -94,10 +94,9 @@ model CardVocabularySelfData {
 }
 
 model UserLearnData {
-    id                      String @id @default(auto()) @map("_id") @db.ObjectId
-    UserId                  String @db.ObjectId
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+
     PassVocabularyIndexList Int[] //CardVocabularyData的index
-    User                    User[]
 }
 
 // model User {

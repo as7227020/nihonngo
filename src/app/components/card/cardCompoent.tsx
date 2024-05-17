@@ -11,7 +11,7 @@ import { VocabularyType } from "@/app/bsData";
 type CardCompoentProps = {
   title: string;
   cardData: CardVocabularyData;
-  nextFunction: () => void;
+  nextFunction: (isGeTip: boolean) => void;
 };
 
 export default function CardCompoent({
@@ -19,9 +19,18 @@ export default function CardCompoent({
   cardData,
   nextFunction,
 }: CardCompoentProps) {
+  //是否按過提示 案過就不會算會(不會計入已經記得的清單內)
+  const [isGetTip, SetisGetTip] = useState(false);
+
+  //使用者輸入的內容
   const [inputText, SetinputText] = useState("");
+
+  //目前的輸入是否確證的提示(先無用 感覺不用顯示也沒關係 答對會自動下一提)
   const [inputTextStatus, SetinputTextStatus] = useState("");
+
+  //目前是否已經答對
   const [answerState, SetanswerState] = useState(false);
+  //顯示提示的文字(在正確完成回答後也會顯示一下答案在下一提 方便記憶)
   const [answerTip, SetanswerTip] = useState("");
 
   function inputAction(e: string) {
@@ -33,7 +42,7 @@ export default function CardCompoent({
       SetanswerState(true);
       setTimeout(() => {
         SetinputText("");
-        nextFunction();
+        nextFunction(isGetTip);
       }, 1500);
       toast.success("正確, 即將繼續下一題");
     } else {
@@ -43,15 +52,17 @@ export default function CardCompoent({
   }
 
   useEffect(() => {
+    SetisGetTip(false);
     SetinputTextStatus("");
     SetanswerTip("");
     SetanswerState(false);
     SetinputText("");
+    console.log("RESET");
   }, [cardData.question]);
 
   function watchAnswer() {
     if (answerState == true) {
-      nextFunction();
+      nextFunction(isGetTip);
       return;
     }
 
@@ -75,6 +86,7 @@ export default function CardCompoent({
 
     if (answerState == false) {
       SetanswerTip(showTip);
+      SetisGetTip(true);
     }
   }
 

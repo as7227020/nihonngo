@@ -1,6 +1,6 @@
 import prisma from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
-//申請加班
+//編輯/更新單字資料(共用)
 export async function PUT(
   request: Request,
   { params }: { params: { dataId: string } }

@@ -1,3 +1,5 @@
+import { CardVocabularySelfData, UserLearnData } from "@prisma/client";
+
 type ApiRetrunData = {
   status: Number;
   message: String;
@@ -10,6 +12,8 @@ type User = {
   image: string;
   emailVerified: Date;
   isManager: boolean;
+  UserLearnData?: UserLearnData;
+  CardVocabularySelfData: CardVocabularySelfData[];
 };
 
 type CardDataType = {
@@ -18,5 +22,10 @@ type CardDataType = {
   supperUser: string; //提供者
   note: string; //單字補充
 };
-
-export type { ApiRetrunData, User, CardDataType };
+type TheFinishUIType = {
+  question: string;
+  answer: string;
+  isGetTip: boolean;
+  cardIndex: number;
+};
+export type { ApiRetrunData, User, CardDataType, TheFinishUIType };
