@@ -51,6 +51,7 @@ export default function Home() {
           emailVerified: res?.emailVerified!,
           image: res?.image!,
           isManager: res?.isManager,
+          CardVocabularySelfData: [],
         });
       }
     });
