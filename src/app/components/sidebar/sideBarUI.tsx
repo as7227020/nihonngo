@@ -37,6 +37,7 @@ export default function SideBarUI({ child }: SideBarUIProps) {
           emailVerified: data.emailVerified!,
           image: data.image!,
           isManager: data.isManager,
+          CardVocabularySelfData: [],
         });
         //  router.push("/page/loginView");
       }
