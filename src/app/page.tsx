@@ -10,7 +10,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import LoginView from "./page/loginView/page";
 import toast from "react-hot-toast";
-import { GetUserData } from "./components/user/getUserData";
 import { User } from "./types/type";
 import LoadingView from "./components/UI/loadingView";
 
@@ -49,8 +48,8 @@ export default function Home() {
   console.log(session.status);
   useEffect(() => {
     // const session = await getServerSession(nextAuthOptions);
+    SetloadingViewController(true);
 
-    console.log("客戶端 使用者 session");
     const res = session!.data?.user as User;
 
     if (res == null) {
@@ -67,7 +66,6 @@ export default function Home() {
       });
     }
 
-    SetloadingViewController(true);
     GetProviders();
     SetloadingViewController(false);
   }, [session.status]);
