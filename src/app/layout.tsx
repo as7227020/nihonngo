@@ -27,16 +27,16 @@ export default function RootLayout({
     <html lang="jp">
       <head>
         <body className={notosansjpFont.className}>
-          <SideBarUI
-            child={
-              <NextAuthProvider>
+          <NextAuthProvider>
+            <SideBarUI
+              child={
                 <Suspense fallback={<Loading />}>
                   {children}
                   <ToasterProvider />
                 </Suspense>
-              </NextAuthProvider>
-            }
-          />
+              }
+            />
+          </NextAuthProvider>
         </body>
       </head>
     </html>

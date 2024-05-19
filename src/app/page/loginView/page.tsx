@@ -5,9 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import LobbyPage from "../Lobby/page";
+import { useSession } from "next-auth/react";
 
 export default async function LoginView() {
-  const session = await getServerSession(nextAuthOptions);
+  const { data: session, status } = useSession();
+  // const session = await getServerSession(nextAuthOptions);
   const user = session?.user as User; //當session?.user有值時才會被轉成User類
   if (user == null) {
     return (

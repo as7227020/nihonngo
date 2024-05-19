@@ -1,6 +1,11 @@
 "use client";
 
-import { ClientSafeProvider, getProviders, signIn } from "next-auth/react";
+import {
+  ClientSafeProvider,
+  getProviders,
+  signIn,
+  useSession,
+} from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import LoginView from "./page/loginView/page";
@@ -10,7 +15,13 @@ import { User } from "./types/type";
 import LoadingView from "./components/UI/loadingView";
 
 export default function Home() {
+  const session = useSession();
+
+  const [userData, SetuserData] = useState<User>();
+  const [emailOk, SetemailOk] = useState<boolean>(false);
+  const [loginType, SetloginType] = useState<ClientSafeProvider[]>();
   const [loadingViewController, SetloadingViewController] = useState(true);
+
   const test = async () => {
     console.log("click");
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
@@ -22,8 +33,7 @@ export default function Home() {
     const ans = response.json();
     console.log(ans);
   };
-  const [emailOk, SetemailOk] = useState<boolean>(false);
-  const [loginType, SetloginType] = useState<ClientSafeProvider[]>();
+
   const GetProviders = async () => {
     const providers = await getProviders().then((res) => {
       let loginType: ClientSafeProvider[] = [];
@@ -36,33 +46,35 @@ export default function Home() {
     });
   };
 
-  const [userData, SetuserData] = useState<User>();
-  const CheckIsLongin = async () => {
-    GetUserData().then((res) => {
-      console.log("login?");
-      console.log(res);
-      if (res == null) {
-        SetuserData(undefined);
-      } else {
-        SetuserData({
-          id: res?.id!,
-          name: res?.name!,
-          email: res?.email!,
-          emailVerified: res?.emailVerified!,
-          image: res?.image!,
-          isManager: res?.isManager,
-          CardVocabularySelfData: [],
-        });
-      }
-    });
-  };
-
+  console.log(session.status);
   useEffect(() => {
+    // const session = await getServerSession(nextAuthOptions);
+
+    console.log("客戶端 使用者 session");
+    const res = session!.data?.user as User;
+
+    if (res == null) {
+      SetuserData(undefined);
+    } else {
+      SetuserData({
+        id: res?.id!,
+        name: res?.name!,
+        email: res?.email!,
+        emailVerified: res?.emailVerified!,
+        image: res?.image!,
+        isManager: res?.isManager,
+        CardVocabularySelfData: [],
+      });
+    }
+
     SetloadingViewController(true);
-    CheckIsLongin();
     GetProviders();
     SetloadingViewController(false);
-  }, []);
+  }, [session.status]);
+
+  if (session.status == "loading") {
+    return <div>loading...</div>;
+  }
 
   return (
     <div className="container p-2">
@@ -72,8 +84,8 @@ export default function Home() {
           <h5 className="card-title">日文學習網站へようこそ！</h5>
           <p className="card-text">ここでは漢字をたぶっり練習できます。</p>
 
-          {userData != null && userData?.name != "" ? (
-            <div>HELLO {userData.name}</div>
+          {session.status != "unauthenticated" ? (
+            <div>HELLO {userData?.name}</div>
           ) : (
             <div>
               <p className="card-text">

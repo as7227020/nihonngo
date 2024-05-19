@@ -4,7 +4,7 @@ import "./sidebarUI.css";
 import { useRouter } from "next/navigation";
 import { GetUserData } from "../user/getUserData";
 import { User } from "@/app/types/type";
-import { signIn, signOut } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 /*
     background-color: #273270;
     color: white;
@@ -18,30 +18,27 @@ type SideBarUIProps = {
   child: any;
 };
 export default function SideBarUI({ child }: SideBarUIProps) {
+  const session = useSession();
+
   const router = useRouter();
 
   const [theStaffData, SettheStaffData] = useState<User>();
   const checkuser = async () => {
-    GetUserData(false).then((data) => {
-      if (data == null) {
-        // if (page == "/register") {
-        //   //如果再register畫面不移動
-        // } else {
-        //   router.push("/login");
-        // }
-      } else {
-        SettheStaffData({
-          id: data.id!,
-          name: data.name!,
-          email: data.email!,
-          emailVerified: data.emailVerified!,
-          image: data.image!,
-          isManager: data.isManager,
-          CardVocabularySelfData: [],
-        });
-        //  router.push("/page/loginView");
-      }
-    });
+    const res = session!.data?.user as User;
+
+    if (res == null) {
+      SettheStaffData(undefined);
+    } else {
+      SettheStaffData({
+        id: res?.id!,
+        name: res?.name!,
+        email: res?.email!,
+        emailVerified: res?.emailVerified!,
+        image: res?.image!,
+        isManager: res?.isManager,
+        CardVocabularySelfData: [],
+      });
+    }
   };
 
   useEffect(() => {
@@ -64,7 +61,8 @@ export default function SideBarUI({ child }: SideBarUIProps) {
         x.removeEventListener("click", (e) => handleClick(e));
       });
     };
-  }, []);
+  }, [session.status]);
+
   const handle2 = (e: Element) => {
     e.classList.add("active");
   };
