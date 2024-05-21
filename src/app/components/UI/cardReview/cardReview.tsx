@@ -31,6 +31,7 @@ export default function CardReview({
         </div>
         <div className="card-text">熟悉度 : {cardData.nowMemoryValue}/100</div>
         <div className="card-text">備註 : {cardData.note}</div>
+        <div className="card-text">翻譯 : {cardData.translateStr}</div>
         <div className="card-text">
           熟悉 : {cardData.isBeMemory == true ? "O" : "X"}
         </div>
