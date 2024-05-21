@@ -1,16 +1,14 @@
 "use client";
 
-import { CardDataType } from "@/app/types/type";
+import { CardComponentDataType } from "@/app/types/type";
 import { useEffect, useState } from "react";
 import "./cardCompoent.css";
 import Speaker from "../speaker/speaker";
 import toast from "react-hot-toast";
-import { CardVocabularyData } from "@prisma/client";
-import { VocabularyType } from "@/app/bsData";
 
 type CardCompoentProps = {
   title: string;
-  cardData: CardVocabularyData;
+  cardData: CardComponentDataType;
   nextFunction: (isGeTip: boolean) => void;
 };
 
@@ -103,9 +101,6 @@ export default function CardCompoent({
         <div className="col-12">
           <div className="card text-center">
             <h5 className="card-header" style={{ fontWeight: "600" }}>
-              {cardData.vocabularyType >= 0
-                ? "難度:" + VocabularyType[cardData.vocabularyType]
-                : ""}{" "}
               進度({title})
             </h5>
             <div className="card-body">

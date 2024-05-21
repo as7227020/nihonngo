@@ -25,7 +25,7 @@ export async function PUT(
   const dataId = params.dataId;
   console.log(dataId);
   try {
-    const getData = await prisma.cardVocabularyData.findUnique({
+    const getData = await prisma.cardVocabularySelfData.findUnique({
       where: {
         id: dataId,
       },
@@ -39,7 +39,7 @@ export async function PUT(
       });
     }
 
-    const res = await prisma.cardVocabularyData.update({
+    const res = await prisma.cardVocabularySelfData.update({
       where: {
         id: dataId,
       },
@@ -47,11 +47,10 @@ export async function PUT(
         question: question,
         answer: answer,
         translateStr: translateStr,
-        supperUser: supperUser,
+
         vocabularyType: vocabularyType,
         note: note,
         isShow: isShow,
-        createDT: nowDateData,
       },
     });
     //let passData = res.

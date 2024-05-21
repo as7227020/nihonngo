@@ -5,6 +5,7 @@ import LoadingView from "@/app/components/UI/loadingView";
 import AddVocabularyView from "@/app/components/addVocabularyView/page";
 import CardCompoent from "@/app/components/card/cardCompoent";
 import { GetUserData } from "@/app/components/user/getUserData";
+import { CardVocabularyDataToComponenet } from "@/app/tools";
 
 import { CardDataType, TheFinishUIType, User } from "@/app/types/type";
 import { CardVocabularyData } from "@prisma/client";
@@ -33,7 +34,7 @@ export default function QuestionMain() {
       question: cardDatas[nowIndex].question,
       answer: cardDatas[nowIndex].answer,
       isGetTip: isGetTip,
-      cardIndex: cardDatas[nowIndex].index,
+      cardIndex: String(cardDatas[nowIndex].index),
     });
     SetfinishDatas(nowFinishDatas);
     if (cardDatas.length == nowIndexEmpty) {
@@ -99,13 +100,18 @@ export default function QuestionMain() {
   useEffect(() => {
     DoInit();
   }, []);
+
+  if (cardDatas == null) {
+    return <div>...</div>;
+  }
+
   return (
     <div>
       <LoadingView viewSwitch={loadingViewController} />
       {cardDatas.length >= 1 && cardDatas.length != nowIndex ? (
         <CardCompoent
           title={nowIndex + 1 + " / " + cardDatas.length}
-          cardData={cardDatas[nowIndex]}
+          cardData={CardVocabularyDataToComponenet(cardDatas[nowIndex])}
           nextFunction={(isGetTip) => {
             NextQuestion(isGetTip);
           }}

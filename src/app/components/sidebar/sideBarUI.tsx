@@ -68,7 +68,7 @@ export default function SideBarUI({ child }: SideBarUIProps) {
   };
   const sideBarcontroller = () => {
     const d = document.querySelector(".sidebar");
-    console.log(d);
+    //  console.log(d);
     if (d?.classList.contains("active") == true) {
       d?.classList.remove("active");
     } else {
@@ -148,10 +148,10 @@ export default function SideBarUI({ child }: SideBarUIProps) {
           >
             <a
               className="text-decoration-none px-3 py-2 d-block"
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/page/myVocabularyManage")}
               style={{ cursor: "pointer" }}
             >
-              <i className="fal fa-envelope-open-text"></i> 我的單字庫(無)
+              <i className="fal fa-envelope-open-text"></i> 我的單字庫
             </a>
           </li>
           <li
@@ -162,7 +162,7 @@ export default function SideBarUI({ child }: SideBarUIProps) {
           >
             <a
               className="text-decoration-none px-3 py-2 d-block"
-              onClick={() => router.push("/")}
+              onClick={() => router.push("/page/myVocabulary")}
               style={{ cursor: "pointer" }}
             >
               <i className="fal fa-users"></i>

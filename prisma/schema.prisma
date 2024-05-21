@@ -79,7 +79,6 @@ model CardVocabularyData {
 
 model CardVocabularySelfData {
     id             String   @id @default(auto()) @map("_id") @db.ObjectId
-    index          Int //編號
     question       String //問題
     answer         String //答案
     translateStr   String //中文意思
@@ -96,7 +95,8 @@ model CardVocabularySelfData {
 model UserLearnData {
     id String @id @default(auto()) @map("_id") @db.ObjectId
 
-    PassVocabularyIndexList Int[] //CardVocabularyData的index
+    PassVocabularyIndexList  Int[] //CardVocabularyData的index
+    theUserCustomizationType String[] //使用者自己增加單字時的分類資料
 }
 
 // model User {

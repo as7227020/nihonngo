@@ -35,6 +35,7 @@ export async function PUT(
       let newData: UserLearnData = {
         id: userId,
         PassVocabularyIndexList: newPassData,
+        theUserCustomizationType: [],
       };
       const updateData = await prisma.userLearnData.create({
         data: newData,

@@ -5,8 +5,12 @@ import toast from "react-hot-toast";
 import { DoTranslate, Gethiragara } from "../action/helpAPI";
 import LoadingView from "../UI/loadingView";
 import { VocabularyType } from "@/app/bsData";
+import { useSession } from "next-auth/react";
+import { User } from "@/app/types/type";
 
 export default function AddVocabularyView() {
+  const session = useSession();
+  const userData = session!.data?.user as User;
   const GetInitData = () => {
     return {
       id: "",
@@ -74,6 +78,7 @@ export default function AddVocabularyView() {
       }
     } else {
       empty.push(inputDataBody);
+      inputDataBody.supperUser = userData.name;
       SetcardDatas(empty);
       const userDatas = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/addVocabulary`,
@@ -366,7 +371,7 @@ export default function AddVocabularyView() {
               </tr>
             </thead>
             <tbody>
-              {cardDatas.length > 0 ? (
+              {cardDatas != null && cardDatas.length > 0 ? (
                 cardDatas.map((data) => (
                   <tr key={data.id}>
                     <th scope="row">{data.index}</th>

@@ -15,7 +15,14 @@ type User = {
   UserLearnData?: UserLearnData;
   CardVocabularySelfData: CardVocabularySelfData[];
 };
-
+type CardComponentDataType = {
+  fromType: string;
+  question: string;
+  answer: string;
+  supperUser: string; //提供者
+  note: string; //單字補充
+  translateStr: string;
+};
 type CardDataType = {
   question: string;
   answer: string;
@@ -26,6 +33,12 @@ type TheFinishUIType = {
   question: string;
   answer: string;
   isGetTip: boolean;
-  cardIndex: number;
+  cardIndex: string;
 };
-export type { ApiRetrunData, User, CardDataType, TheFinishUIType };
+export type {
+  ApiRetrunData,
+  User,
+  CardDataType,
+  TheFinishUIType,
+  CardComponentDataType,
+};

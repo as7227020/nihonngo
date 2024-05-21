@@ -1,4 +1,3 @@
-import { getProviders } from "next-auth/react";
 import prisma from "../../lib/prisma";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
@@ -81,12 +80,10 @@ export async function GET(request: Request, response: Response) {
           id: userData?.userLearnDataId,
         },
       });
-      console.log("getUserLearnData");
-      console.log(getUserLearnData);
+      // console.log("getUserLearnData");
+      // console.log(getUserLearnData);
       bePassData = getUserLearnData?.PassVocabularyIndexList!;
     }
-
-    //有登入拿資料
 
     //const res = await prisma.user.findFirst({ skip: 0 });
     const currentCount = await prisma.cardVocabularyData.aggregate({
@@ -137,6 +134,7 @@ export async function GET(request: Request, response: Response) {
       data: randomRecords,
     });
   } catch (err: any) {
+    console.log(err);
     return NextResponse.json({
       status: 500,
       messgae: "發生異常錯誤",
