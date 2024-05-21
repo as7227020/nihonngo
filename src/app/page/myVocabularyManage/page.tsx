@@ -213,6 +213,7 @@ export default function MyVocabularyManage() {
   };
 
   const OnClickEditBtn = async (index: number) => {
+    SetloadingViewController(true);
     console.log(CustomizationType[index]);
     const userDatas = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/cardCustom`,
@@ -237,7 +238,9 @@ export default function MyVocabularyManage() {
     } else {
       toast.error(resUserData.message);
     }
+    SetloadingViewController(false);
   };
+  //刪除/移除功能先不要
   const OnClickDeleteBtn = async (index: number) => {
     const userDatas = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/cardCustom`,
@@ -257,7 +260,7 @@ export default function MyVocabularyManage() {
     if (resUserData.status == 200) {
       console.log(resUserData.data);
 
-      toast.success("增加成功");
+      toast.success("移除成功");
       GetMyType();
     } else {
       toast.error(resUserData.message);
@@ -271,6 +274,7 @@ export default function MyVocabularyManage() {
       toast.error("目前最多增加10個種類");
       return;
     }
+    SetloadingViewController(true);
     const userDatas = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/cardCustom`,
       {
@@ -292,9 +296,10 @@ export default function MyVocabularyManage() {
     } else {
       toast.error(resUserData.message);
     }
-
+    SetloadingViewController(false);
     SetnowAddTypeStr("");
   };
+
   if (session.status == "loading") {
     return <div>check login data...</div>;
   }
@@ -305,9 +310,9 @@ export default function MyVocabularyManage() {
   return (
     <div className="container p-2">
       <LoadingView viewSwitch={loadingViewController} />
-
       <div className="text-center d-flex gap-3">
         <ModalEmpty
+          isLoading={loadingViewController}
           modalWindowNumber={2}
           btnName="單字分類編輯"
           theView={
@@ -392,6 +397,7 @@ export default function MyVocabularyManage() {
           }
         />
         <ModalEmpty
+          isLoading={loadingViewController}
           modalWindowNumber={1}
           btnName="單字管理畫面"
           theView={

@@ -9,7 +9,7 @@
 .inputType{
     border: 1px solid rgb(99, 96, 96);
     text-align: center;
-    height: 40px;
+    
     font-size: 1.2rem;
 }
 .inputType:focus{

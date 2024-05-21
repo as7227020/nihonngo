@@ -1,15 +1,18 @@
 "use client";
 import React, { useEffect } from "react";
+import LoadingView from "../loadingView";
 
 type ModalEmptyProps = {
   modalWindowNumber: number; //如果同個畫面有多個該元件的話 不要一樣的數字就好
   btnName: string;
   theView: any;
+  isLoading: boolean;
 };
 export default function ModalEmpty({
   btnName,
   theView,
   modalWindowNumber,
+  isLoading,
 }: ModalEmptyProps) {
   useEffect(() => {
     require("bootstrap/dist/js/bootstrap.bundle.js");
@@ -33,6 +36,7 @@ export default function ModalEmpty({
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+          <LoadingView viewSwitch={isLoading} />
           <div className="modal-content">
             <div className="modal-header">
               <h5

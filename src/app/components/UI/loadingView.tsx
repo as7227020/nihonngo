@@ -10,7 +10,7 @@ export default function LoadingView({ viewSwitch }: LoadingViewProps) {
   return (
     <div>
       {viewSwitch && (
-        <div className="topcss p-2">
+        <div className="topcss p-2" style={{ zIndex: "110" }}>
           <div>
             <Loading />
           </div>
