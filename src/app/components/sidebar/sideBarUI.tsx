@@ -163,7 +163,7 @@ export default function SideBarUI({ child }: SideBarUIProps) {
               }}
               style={{ cursor: "pointer" }}
             >
-              <i className="fal fa-envelope-open-text"></i> 我的單字庫
+              <i className="fal fa-envelope-open-text"></i> 單字庫管理
             </a>
           </li>
           <li
@@ -181,7 +181,7 @@ export default function SideBarUI({ child }: SideBarUIProps) {
               style={{ cursor: "pointer" }}
             >
               <i className="fal fa-users"></i>
-              我的單字練習
+              單字練習
             </a>
           </li>
         </ul>
