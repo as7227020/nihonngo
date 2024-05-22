@@ -114,7 +114,7 @@ export default function Home() {
                   alignItems: "center",
                 }}
               >
-                <button
+                {/* <button
                   onClick={() => {
                     if (emailOk == false) {
                       toast.error("メールの同意チェック必要です。");
@@ -137,7 +137,7 @@ export default function Home() {
                   id="loginLine"
                 >
                   LINE 登録
-                </button>
+                </button> */}
                 <button
                   onClick={() => {
                     if (emailOk == false) {
