@@ -194,6 +194,10 @@ export default function MyVocabularyManage() {
       const learnData: UserLearnData = reslearnDatas.data;
       console.log(learnData);
       SetCustomizationType(learnData.theUserCustomizationType);
+      const theCount = learnData.theUserCustomizationType.length!;
+      if (theCount <= 0) {
+        toast.error("目前還沒有建立單字分類,可以建立自己的單字卡分類.");
+      }
     } else {
       toast.error(reslearnDatas.message);
     }

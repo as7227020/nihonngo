@@ -99,7 +99,10 @@ export default function SideBarUI({ child }: SideBarUIProps) {
           >
             <a
               className="text-decoration-none px-3 py-2 d-block"
-              onClick={() => router.push("/")}
+              onClick={() => {
+                router.push("/");
+                sideBarcontroller();
+              }}
               style={{ cursor: "pointer" }}
             >
               <i className="bi bi-house"></i> 首頁
@@ -112,7 +115,10 @@ export default function SideBarUI({ child }: SideBarUIProps) {
             }}
           >
             <a
-              onClick={() => router.push("/page/questionMain")}
+              onClick={() => {
+                router.push("/page/questionMain");
+                sideBarcontroller();
+              }}
               className="text-decoration-none px-3 py-2 d-block"
               style={{ cursor: "pointer" }}
             >
@@ -129,7 +135,10 @@ export default function SideBarUI({ child }: SideBarUIProps) {
               }}
             >
               <a
-                onClick={() => router.push("/page/vocabularyManager")}
+                onClick={() => {
+                  router.push("/page/vocabularyManager");
+                  sideBarcontroller();
+                }}
                 className="text-decoration-none px-3 py-2 d-block d-flex justify-content-between"
                 style={{ cursor: "pointer" }}
               >
@@ -148,7 +157,10 @@ export default function SideBarUI({ child }: SideBarUIProps) {
           >
             <a
               className="text-decoration-none px-3 py-2 d-block"
-              onClick={() => router.push("/page/myVocabularyManage")}
+              onClick={() => {
+                router.push("/page/myVocabularyManage");
+                sideBarcontroller();
+              }}
               style={{ cursor: "pointer" }}
             >
               <i className="fal fa-envelope-open-text"></i> 我的單字庫
@@ -162,7 +174,10 @@ export default function SideBarUI({ child }: SideBarUIProps) {
           >
             <a
               className="text-decoration-none px-3 py-2 d-block"
-              onClick={() => router.push("/page/myVocabulary")}
+              onClick={() => {
+                router.push("/page/myVocabulary");
+                sideBarcontroller();
+              }}
               style={{ cursor: "pointer" }}
             >
               <i className="fal fa-users"></i>
