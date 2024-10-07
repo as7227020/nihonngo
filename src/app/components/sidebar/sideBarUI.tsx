@@ -184,6 +184,25 @@ export default function SideBarUI({ child }: SideBarUIProps) {
               單字練習
             </a>
           </li>
+
+          <li
+            className=""
+            onClick={(e) => {
+              handle2(e.currentTarget);
+            }}
+          >
+            <a
+              className="text-decoration-none px-3 py-2 d-block"
+              onClick={() => {
+                router.push("/page/lostark");
+                sideBarcontroller();
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              <i className="fal fa-users"></i>
+              さけのわ
+            </a>
+          </li>
         </ul>
         <hr className="h-color mx-2" style={{ color: "white" }} />
 

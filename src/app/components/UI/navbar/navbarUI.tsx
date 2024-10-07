@@ -107,6 +107,12 @@ const NavbarUI = () => {
               </a>
             </li>
 
+            <li className="nav-item">
+              <a className="nav-link" href="/page/lostark">
+                さけのわ
+              </a>
+            </li>
+
             {theStaffData != undefined &&
             (GetIsAdmin(theStaffData.name) || theStaffData.isManager) ? (
               <li className="nav-item">
