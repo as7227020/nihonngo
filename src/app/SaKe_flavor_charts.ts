@@ -1,4 +1,11 @@
-
+/*
+f1	華やか
+f2	芳醇
+f3	重厚
+f4	穏やか
+f5	ドライ
+f6	軽快
+*/
 export const flavor_charts = {
   copyright: "Sakenowa",
   flavorCharts: [

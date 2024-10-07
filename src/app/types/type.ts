@@ -50,7 +50,7 @@ type sakeType_brand_flavor_tags = {
   flavorTags: {
     brandId: number;
     tagIds: number[];
-  };
+  }[];
 };
 
 //口味
@@ -99,11 +99,35 @@ type sakeType_flavor_tag = {
 type sakeType_rankings = {
   copyright: string;
   yearMonth: string;
+  //1~100名的 排行榜
   overall: {
     rank: number;
     score: number;
     brandId: number;
   }[];
+  areas: {
+    areaId: number;
+    ranking: {
+      rank: number;
+      score: number;
+      brandId: number;
+    }[];
+  }[];
+};
+
+type SakeData = {
+  name: string;
+  brewerie: string;
+  area: string;
+  flover: string[];
+  rankScore: number;
+  rankArea: number;
+  chartF1: number;
+  chartF2: number;
+  chartF3: number;
+  chartF4: number;
+  chartF5: number;
+  chartF6: number;
 };
 
 export type {
@@ -119,4 +143,5 @@ export type {
   sakeType_breweries,
   sakeType_flavor_tag,
   sakeType_rankings,
+  SakeData,
 };
