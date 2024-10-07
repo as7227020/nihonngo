@@ -1,6 +1,7 @@
 "use client";
 
 import SakeCard from "@/app/components/sake/sakeCard";
+import LoadingView from "@/app/components/UI/loadingView";
 import { brand_flavor_tags } from "@/app/SaKe_brand_flavor_tags";
 import { brands } from "@/app/SaKe_brands";
 import { breweries } from "@/app/SaKe_breweries";
@@ -41,6 +42,7 @@ export default function LobbyPage() {
   const [brandSelectIndex, SetbrandSelectIndex] = useState(-1);
 
   const [SakeData, SetSakeData] = useState<SakeData[]>();
+  const [loadingViewController, SetloadingViewController] = useState(false);
 
   useEffect(() => {
     Setareas_Data(areas);
@@ -104,17 +106,20 @@ export default function LobbyPage() {
   return (
     <div>
       さけのわ
+      <LoadingView viewSwitch={loadingViewController} />
       <select
         className="form-select"
         aria-label="Default select example"
         id="role"
-        onChange={(e) => {
+        onChange={async (e) => {
+          SetloadingViewController(true);
           SetbrandSelectIndex(Number(e.target.value));
           SetSakeData([]);
           const brandId = brands_Data?.brands[Number(e.target.value)].id;
           let sakeDatas: SakeData[] = [];
           sakeDatas.push(GetSakeData(brandId!));
           SetSakeData(sakeDatas);
+          SetloadingViewController(false);
         }}
       >
         <option value="">酒名 共{brands_Data?.brands.length}筆</option>
@@ -130,7 +135,8 @@ export default function LobbyPage() {
         className="form-select"
         aria-label="Default select example"
         id="role"
-        onChange={(e) => {
+        onChange={async (e) => {
+          SetloadingViewController(true);
           const areaId = areas_Data?.areas[Number(e.target.value)].id;
           const breweriesTotalData = breweries_Data?.breweries.filter(
             (x) => x.areaId == areaId
@@ -151,6 +157,7 @@ export default function LobbyPage() {
           });
 
           SetSakeData(sakeDatas);
+          SetloadingViewController(false);
         }}
       >
         <option value="">地區</option>
@@ -166,7 +173,8 @@ export default function LobbyPage() {
         className="form-select"
         aria-label="Default select example"
         id="role"
-        onChange={(e) => {
+        onChange={async (e) => {
+          SetloadingViewController(true);
           const flavorId = flavor_tag_Data?.tags[Number(e.target.value)].id;
           const flavorTotalData = brand_flavor_tags_Data?.flavorTags.filter(
             (x) =>
@@ -176,7 +184,6 @@ export default function LobbyPage() {
 
           let sakeDatas: SakeData[] = [];
 
-          console.log(flavorTotalData);
           flavorTotalData!.forEach((data) => {
             const brandData = brands_Data?.brands.filter(
               (x) => x.id == data.brandId
@@ -190,6 +197,7 @@ export default function LobbyPage() {
           });
 
           SetSakeData(sakeDatas);
+          SetloadingViewController(false);
         }}
       >
         <option value="">口味</option>
