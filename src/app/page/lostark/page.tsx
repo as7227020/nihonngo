@@ -54,6 +54,27 @@ export default function LobbyPage() {
     Setrankings_Data(rankings);
   }, []);
 
+  const SetFlavor = async (index: number) => {
+    const flavorId = flavor_tag_Data?.tags[Number(index)].id;
+    const flavorTotalData = brand_flavor_tags_Data?.flavorTags.filter(
+      (x) => x.tagIds.length >= 1 && x.tagIds.find((x) => x == flavorId) != null
+    );
+
+    let sakeDatas: SakeData[] = [];
+
+    flavorTotalData!.forEach((data) => {
+      const brandData = brands_Data?.brands.filter((x) => x.id == data.brandId);
+      if (brandData != null && brandData.length >= 1) {
+        brandData.forEach((brand) => {
+          const d = GetSakeData(brand.id!);
+          sakeDatas.push(d);
+        });
+      }
+    });
+
+    SetSakeData(sakeDatas);
+  };
+
   const GetSakeData = (brandId: number): SakeData => {
     const brands = brands_Data?.brands.filter((x) => x.id == brandId);
 
@@ -126,7 +147,7 @@ export default function LobbyPage() {
 
         {brands_Data?.brands.map((data, index) => (
           <option key={index} value={index}>
-            {data.id} - {data.name}
+            {data.name}
           </option>
         ))}
       </select>
@@ -137,6 +158,7 @@ export default function LobbyPage() {
         id="role"
         onChange={async (e) => {
           SetloadingViewController(true);
+
           const areaId = areas_Data?.areas[Number(e.target.value)].id;
           const breweriesTotalData = breweries_Data?.breweries.filter(
             (x) => x.areaId == areaId
@@ -164,7 +186,7 @@ export default function LobbyPage() {
 
         {areas_Data?.areas.map((data, index) => (
           <option key={index} value={index}>
-            {data.id} - {data.name}
+            {data.name}
           </option>
         ))}
       </select>
@@ -173,38 +195,18 @@ export default function LobbyPage() {
         className="form-select"
         aria-label="Default select example"
         id="role"
-        onChange={async (e) => {
+        onChange={(e) => {
           SetloadingViewController(true);
-          const flavorId = flavor_tag_Data?.tags[Number(e.target.value)].id;
-          const flavorTotalData = brand_flavor_tags_Data?.flavorTags.filter(
-            (x) =>
-              x.tagIds.length >= 1 &&
-              x.tagIds.find((x) => x == flavorId) != null
-          );
-
-          let sakeDatas: SakeData[] = [];
-
-          flavorTotalData!.forEach((data) => {
-            const brandData = brands_Data?.brands.filter(
-              (x) => x.id == data.brandId
-            );
-            if (brandData != null && brandData.length >= 1) {
-              brandData.forEach((brand) => {
-                const d = GetSakeData(brand.id!);
-                sakeDatas.push(d);
-              });
-            }
+          SetFlavor(Number(e.target.value)).then(() => {
+            SetloadingViewController(false);
           });
-
-          SetSakeData(sakeDatas);
-          SetloadingViewController(false);
         }}
       >
         <option value="">口味</option>
 
         {flavor_tag_Data?.tags.map((data, index) => (
           <option key={index} value={index}>
-            {data.id} : {data.tag}
+            {data.tag}
           </option>
         ))}
       </select>
