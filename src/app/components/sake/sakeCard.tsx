@@ -2,14 +2,18 @@
 
 import { SakeData } from "@/app/types/type";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 type sakeCardProps = {
+  msg: string;
   Sake_Data: SakeData;
 };
 
-export default function SakeCard({ Sake_Data }: sakeCardProps) {
+export default function SakeCard({ msg, Sake_Data }: sakeCardProps) {
   useEffect(() => {}, []);
+
+  if (Sake_Data == null) {
+    return <div></div>;
+  }
 
   return (
     <div className="container p-2">
@@ -24,7 +28,7 @@ export default function SakeCard({ Sake_Data }: sakeCardProps) {
         <div className="col-12">
           <div className="card text-center">
             <h5 className="card-header" style={{ fontWeight: "600" }}>
-              {Sake_Data.name}
+              No.{msg} {Sake_Data.name}
             </h5>
             <div className="card-body">
               <div
@@ -67,24 +71,24 @@ export default function SakeCard({ Sake_Data }: sakeCardProps) {
                 比例 :
                 <div className="">
                   <span className="badge bg-info text-dark m-1">
-                    華やか : {Sake_Data.chartF1.toFixed(4)}
+                    華やか : {(Sake_Data.chartF1 * 100).toFixed(2)}%
                   </span>
                   <span className="badge bg-info text-dark m-1">
-                    芳醇 : {Sake_Data.chartF2.toFixed(4)}
+                    芳醇 : {(Sake_Data.chartF2 * 100).toFixed(2)}%
                   </span>
                   <span className="badge bg-info text-dark m-1">
-                    重厚 : {Sake_Data.chartF3.toFixed(4)}
+                    重厚 : {(Sake_Data.chartF3 * 100).toFixed(2)}%
                   </span>
                   <br />
                   <span className="badge bg-info text-dark m-1">
-                    穏やか : {Sake_Data.chartF4.toFixed(4)}
+                    穏やか : {(Sake_Data.chartF4 * 100).toFixed(2)}%
                   </span>
 
                   <span className="badge bg-info text-dark m-1">
-                    ドライ : {Sake_Data.chartF5.toFixed(4)}
+                    ドライ : {(Sake_Data.chartF5 * 100).toFixed(2)}%
                   </span>
                   <span className="badge bg-info text-dark m-1">
-                    軽快 : {Sake_Data.chartF6.toFixed(4)}
+                    軽快 : {(Sake_Data.chartF6 * 100).toFixed(2)}%
                   </span>
                 </div>
                 <br />

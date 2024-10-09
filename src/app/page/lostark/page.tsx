@@ -42,7 +42,18 @@ export default function LobbyPage() {
   const [brandSelectIndex, SetbrandSelectIndex] = useState(-1);
 
   const [SakeData, SetSakeData] = useState<SakeData[]>();
+  const [SakeData_Show, SetSakeData_Show] = useState<SakeData[]>();
   const [loadingViewController, SetloadingViewController] = useState(false);
+
+  //頁數的陣列資料 用來顯示頁數 map用
+  const [pageData, SetpageData] = useState<number[]>([1]);
+  //目前頁數
+  const [currPage, SetcurrPage] = useState(1);
+  //目前最大頁數
+  const [maxPageCount, SetmaxPageCount] = useState(0);
+  const ONE_PAGE_SHOW_COUNT = 10;
+
+  const [searchWord, SetsearchWord] = useState("");
 
   useEffect(() => {
     Setareas_Data(areas);
@@ -52,6 +63,7 @@ export default function LobbyPage() {
     Setflavor_tag_Data(flavor_tags);
     Setflavor_charts_Data(flavor_charts);
     Setrankings_Data(rankings);
+    SetcurrPage(1);
   }, []);
 
   const SetFlavor = async (index: number) => {
@@ -73,6 +85,113 @@ export default function LobbyPage() {
     });
 
     SetSakeData(sakeDatas);
+    SetPage(sakeDatas);
+  };
+
+  const SetPage = (sakeDatas: SakeData[]) => {
+    var i: number;
+    let sakeDatas_Show: SakeData[] = [];
+    for (
+      i = 0 + (currPage - 1) * ONE_PAGE_SHOW_COUNT;
+      i < currPage * ONE_PAGE_SHOW_COUNT;
+      i++
+    ) {
+      // 1開始 ~ ...totalPageCount
+      sakeDatas_Show.push(sakeDatas[i]);
+    }
+
+    ChangePage(1, sakeDatas, true);
+
+    SetSakeData_Show(sakeDatas_Show);
+  };
+
+  //往 top: 340位置移動
+  const scrollUp = () => {
+    window.scrollTo({
+      top: 280,
+      behavior: "smooth",
+    });
+  };
+
+  //切換頁數
+  const ChangePage = (
+    page: number,
+    newSakeData: SakeData[],
+    forceUpdate: boolean
+  ) => {
+    if (forceUpdate == false && currPage == page) {
+      //console.log("不更新");
+      return;
+    }
+
+    const mySakeData: SakeData[] =
+      newSakeData == null ? SakeData! : newSakeData;
+    //畫面位置移到該位置
+    //scrollUp();
+
+    //讀取顯示開啟
+    SetloadingViewController(true);
+
+    var i: number;
+    let sakeDatas_Show: SakeData[] = [];
+    for (
+      i = 0 + (page - 1) * ONE_PAGE_SHOW_COUNT;
+      i < page * ONE_PAGE_SHOW_COUNT;
+      i++
+    ) {
+      // 1開始 ~ ...totalPageCount
+      if (mySakeData![i] != null) {
+        sakeDatas_Show.push(mySakeData![i]);
+      }
+    }
+    SetSakeData_Show(sakeDatas_Show);
+
+    SetcurrPage(page);
+
+    const totalPageCount = Math.ceil(mySakeData!.length / ONE_PAGE_SHOW_COUNT);
+    let thePageData: number[] = [];
+    var i: number;
+
+    const overPagetoMid = 4; //到第4頁以上至中
+    if (page >= overPagetoMid && page != totalPageCount) {
+      //4頁以上並且不等於最後一頁 主要顯示4,5,6,7,8頁數 ,其他狀況下面else處理
+      for (
+        i = totalPageCount - (page - 3) <= 4 ? page - 4 : page - 3;
+        i < page + 2;
+        i++
+      ) {
+        if (i < totalPageCount) {
+          thePageData.push(i + 1);
+        }
+      }
+    } else {
+      //處理其他狀況
+      if (page != totalPageCount) {
+        //最開始的1~最後一頁 小於5就僅顯示小於5的頁數為止
+        for (i = 0; i < 5; i++) {
+          // 1開始 ~ ...totalPageCount
+          if (i < totalPageCount) {
+            thePageData.push(i + 1);
+          }
+        }
+      } else {
+        //切到最後一頁 總共15頁 顯示11,12,13,14,15
+        for (
+          i = totalPageCount - 5 <= 0 ? 0 : Math.abs(totalPageCount - 5);
+          i < totalPageCount;
+          i++
+        ) {
+          // 1開始 ~ ...totalPageCount
+          thePageData.push(i + 1);
+        }
+      }
+    }
+    //存進頁數顯示資料
+    SetpageData(thePageData);
+    SetmaxPageCount(totalPageCount);
+    //送出語法 使用紀錄的
+    //SendReq(sqlRecordStr, page, false);
+    SetloadingViewController(false);
   };
 
   const GetSakeData = (brandId: number): SakeData => {
@@ -126,8 +245,37 @@ export default function LobbyPage() {
 
   return (
     <div>
-      さけのわ
+      さけのわ　 －　目前資料{SakeData?.length}筆
       <LoadingView viewSwitch={loadingViewController} />
+      <div className="input-group mb-3">
+        <span className="input-group-text" style={{ width: "auto" }}>
+          酒名搜尋
+        </span>
+        <input
+          type="text"
+          className="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+          value={searchWord}
+          onChange={(e) => {
+            SetsearchWord(e.target.value);
+            let sakeDatas: SakeData[] = [];
+            if (e.target.value.length >= 1) {
+              const nowSearchData = brands_Data?.brands.filter((x) =>
+                x.name.includes(e.target.value)
+              );
+
+              nowSearchData!.forEach((brand) => {
+                const d = GetSakeData(brand.id!);
+                sakeDatas.push(d);
+              });
+            }
+
+            SetPage(sakeDatas!);
+            SetSakeData(sakeDatas);
+          }}
+        />
+      </div>
       <select
         className="form-select"
         aria-label="Default select example"
@@ -140,6 +288,7 @@ export default function LobbyPage() {
           let sakeDatas: SakeData[] = [];
           sakeDatas.push(GetSakeData(brandId!));
           SetSakeData(sakeDatas);
+          SetPage(sakeDatas);
           SetloadingViewController(false);
         }}
       >
@@ -177,8 +326,9 @@ export default function LobbyPage() {
               });
             }
           });
-
+          //console.log(sakeDatas);
           SetSakeData(sakeDatas);
+          SetPage(sakeDatas);
           SetloadingViewController(false);
         }}
       >
@@ -211,11 +361,92 @@ export default function LobbyPage() {
         ))}
       </select>
       <br />
-      {SakeData != null && SakeData!.length >= 1
-        ? SakeData?.map((data, index) => (
-            <SakeCard key={index} Sake_Data={data} />
+      {SakeData_Show != null && SakeData_Show!.length >= 1
+        ? SakeData_Show?.map((data, index) => (
+            <SakeCard
+              key={index}
+              msg={(
+                (currPage - 1) * ONE_PAGE_SHOW_COUNT +
+                index +
+                1
+              ).toString()}
+              Sake_Data={data}
+            />
           ))
         : ""}
+      {maxPageCount > 1 ? (
+        <div className="row">
+          <div
+            className="col-12"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "15px",
+            }}
+          >
+            <nav
+              aria-label="Page navigation "
+              style={{
+                position: "fixed",
+                zIndex: "15",
+                bottom: "-10px",
+                right: "30%",
+                opacity: "85%",
+              }}
+            >
+              <ul className="pagination pagination-sm">
+                <li className="page-item">
+                  <a
+                    className="page-link"
+                    aria-label="Previous"
+                    onClick={() => {
+                      ChangePage(1, SakeData!, false);
+                    }}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+
+                {pageData.map((num) => (
+                  <li
+                    key={num}
+                    className={
+                      currPage == num ? "page-item active" : "page-item"
+                    }
+                  >
+                    <a
+                      className="page-link"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        ChangePage(num, SakeData!, false);
+                      }}
+                    >
+                      {num}
+                    </a>
+                  </li>
+                ))}
+
+                <li className="page-item">
+                  <a
+                    className="page-link"
+                    onClick={() => {
+                      ChangePage(maxPageCount, SakeData!, false);
+                    }}
+                    aria-label="Next"
+                    style={{ cursor: "pointer" }}
+                  >
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
